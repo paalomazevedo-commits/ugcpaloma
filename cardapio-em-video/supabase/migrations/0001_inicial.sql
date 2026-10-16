@@ -177,6 +177,27 @@ create trigger orders_touch before update on public.orders
   for each row execute function public.touch_updated_at();
 
 -- ---------------------------------------------------------------------------
+-- Permissões explícitas. Funciona com a opção "Automatically expose new tables"
+-- ligada ou desligada: primeiro tira tudo, depois dá só o necessário.
+-- ---------------------------------------------------------------------------
+
+revoke all on all tables in schema public from anon, authenticated;
+grant select on public.restaurants, public.categories, public.items, public.item_sizes, public.item_extras
+  to anon, authenticated;
+grant select on public.restaurant_members, public.platform_admins, public.orders, public.order_items
+  to authenticated;
+grant insert, update, delete on public.categories, public.items, public.item_sizes, public.item_extras
+  to authenticated;
+-- Gerente não pode mudar a própria situação (ativo/suspenso) nem o contador de pedidos
+grant update (name, bio, city, whatsapp, logo_url, delivery_fee_cents,
+  accepts_delivery, accepts_pickup, accepts_table, is_open) on public.restaurants to authenticated;
+-- A equipe só muda a situação do pedido, nunca valores ou dados do cliente
+grant update (status) on public.orders to authenticated;
+grant all on all tables in schema public to service_role;
+grant execute on function public.is_platform_admin(), public.is_member(uuid), public.is_manager(uuid),
+  public.restaurant_is_active(uuid) to anon, authenticated, service_role;
+
+-- ---------------------------------------------------------------------------
 -- Segurança por linha (RLS): ligada em TODAS as tabelas
 -- ---------------------------------------------------------------------------
 
@@ -195,11 +216,6 @@ create policy "restaurante ativo é público" on public.restaurants
   for select using (status = 'active' or public.is_member(id) or public.is_platform_admin());
 create policy "gerente edita o próprio restaurante" on public.restaurants
   for update using (public.is_manager(id)) with check (public.is_manager(id));
-
--- Gerente não pode mudar a própria situação (ativo/suspenso) nem o contador de pedidos
-revoke update on public.restaurants from authenticated;
-grant update (name, bio, city, whatsapp, logo_url, delivery_fee_cents,
-  accepts_delivery, accepts_pickup, accepts_table, is_open) on public.restaurants to authenticated;
 
 create policy "admin vê a si mesmo" on public.platform_admins
   for select using (user_id = auth.uid());
@@ -234,14 +250,9 @@ create policy "equipe vê os pedidos" on public.orders
   for select using (public.is_member(restaurant_id));
 create policy "equipe muda a situação do pedido" on public.orders
   for update using (public.is_member(restaurant_id)) with check (public.is_member(restaurant_id));
-revoke update on public.orders from authenticated;
-grant update (status) on public.orders to authenticated;
 
 create policy "equipe vê os itens dos pedidos" on public.order_items
   for select using (public.is_member(restaurant_id));
-
--- Visitantes sem login não escrevem em nada
-revoke insert, update, delete on all tables in schema public from anon;
 
 -- Pedidos novos aparecem no painel em tempo real (respeitando a RLS)
 alter publication supabase_realtime add table public.orders;

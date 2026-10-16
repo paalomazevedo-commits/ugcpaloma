@@ -34,7 +34,10 @@ grant execute on function pg_temp.expect_denied(text, text) to anon, authenticat
 set role anon;
 set request.jwt.claim.sub = '';
 do $$ begin
-  if (select count(*) from orders) <> 0 then raise exception 'FALHOU: visitante leu pedidos'; end if;
+  begin
+    if (select count(*) from orders) <> 0 then raise exception 'FALHOU: visitante leu pedidos'; end if;
+  exception when insufficient_privilege then null;
+  end;
   if (select count(*) from items) = 0 then raise exception 'FALHOU: visitante não vê o cardápio'; end if;
 end $$;
 select pg_temp.expect_denied($q$insert into orders (restaurant_id, number, mode, customer_name, customer_phone, payment_method, subtotal_cents, total_cents) select id, 9, 'retirada', 'X', '11900000000', 'pix', 0, 0 from restaurants limit 1$q$, 'visitante não cria pedido direto');
