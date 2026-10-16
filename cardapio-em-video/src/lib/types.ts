@@ -1,0 +1,32 @@
+export type Size = { id: string; label: string; note: string | null; price_delta_cents: number; is_default: boolean; position?: number };
+export type Extra = { id: string; name: string; price_cents: number; position?: number };
+export type Item = {
+  id: string;
+  category_id: string | null;
+  name: string;
+  description: string | null;
+  price_cents: number;
+  size_label: string | null;
+  video_url: string | null;
+  poster_url: string | null;
+  ingredients: string[];
+  available: boolean;
+  item_sizes: Size[];
+  item_extras: Extra[];
+};
+export type Category = { id: string; name: string };
+export type Restaurant = {
+  id: string;
+  slug: string;
+  name: string;
+  bio: string | null;
+  city: string | null;
+  logo_url: string | null;
+  delivery_fee_cents: number;
+  accepts_delivery: boolean;
+  accepts_pickup: boolean;
+  accepts_table: boolean;
+  is_open: boolean;
+};
+export type OrderStatus = "novo" | "preparo" | "saiu" | "pronto" | "concluido" | "recusado";
+export type OrderMode = "entrega" | "retirada" | "mesa";
