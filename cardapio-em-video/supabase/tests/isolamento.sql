@@ -78,3 +78,36 @@ end $$;
 reset role;
 
 \echo 'TODOS OS TESTES DE ISOLAMENTO PASSARAM'
+
+-- 4. Vídeos e fotos (Storage)
+set role authenticated;
+set request.jwt.claim.sub = 'aaaaaaaa-0000-0000-0000-000000000001';
+do $$
+declare ra uuid := (select id from restaurants where slug = 'teste-a');
+        rb uuid := (select id from restaurants where slug = 'teste-b');
+begin
+  insert into storage.objects (bucket_id, name) values ('midia', ra || '/item/video.mp4');
+  begin
+    insert into storage.objects (bucket_id, name) values ('midia', rb || '/item/invasor.mp4');
+    raise exception 'FALHOU: A enviou vídeo na pasta de B';
+  exception when insufficient_privilege then null;
+  end;
+  begin
+    insert into storage.objects (bucket_id, name) values ('midia', 'sem-pasta.mp4');
+    raise exception 'FALHOU: A enviou vídeo fora de uma pasta de restaurante';
+  exception when insufficient_privilege then null;
+  end;
+end $$;
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = 'cccccccc-0000-0000-0000-000000000003';
+do $$ begin
+  begin
+    insert into storage.objects (bucket_id, name)
+      values ('midia', (select id from restaurants where slug = 'teste-a') || '/item/atendente.mp4');
+    raise exception 'FALHOU: atendente enviou vídeo';
+  exception when insufficient_privilege then null;
+  end;
+end $$;
+reset role;
+\echo 'TESTES DE MÍDIA PASSARAM'

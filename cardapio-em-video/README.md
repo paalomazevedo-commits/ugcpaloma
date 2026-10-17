@@ -11,12 +11,11 @@ Tecnologia: Next.js 16 + Supabase (banco Postgres, login e tempo real).
 | Cardápio do cliente | `/<endereco-do-restaurante>` | Feed com vídeo de cada item, categorias, tamanho, tirar ingrediente, adicionais, carrinho e envio do pedido. `?mesa=12` no link abre já no modo mesa (para o QR code). |
 | Acompanhar pedido | `/<endereco>/pedido/<id>?t=<código>` | O cliente vê cada etapa. Atualiza sozinha. Só abre com o código secreto do link. |
 | Painel do restaurante | `/painel` | Login, pedidos chegando ao vivo com aviso sonoro, aceitar, recusar, mudar etapa, abrir e fechar a loja, trocar senha. |
+| Editor de cardápio | `/painel/cardapio` | Categorias, itens, preços, tamanhos, adicionais, ingredientes removíveis, esgotar item e envio de vídeo com capa automática. Só dono e gerente editam. |
 | Admin da plataforma | `/admin` | Cadastrar restaurante com o dono, suspender e reativar. |
 
 ## Ainda falta (próximas etapas)
 
-- [ ] Editor de cardápio no painel (hoje os itens entram pelo banco)
-- [ ] Envio de vídeos e fotos pelo painel
 - [ ] Aviso de pedido novo por WhatsApp
 - [ ] Verificação em duas etapas no login do painel e do admin
 - [ ] Páginas de termos de uso e política de privacidade
@@ -31,22 +30,23 @@ Tecnologia: Next.js 16 + Supabase (banco Postgres, login e tempo real).
 1. Crie uma conta em supabase.com e um projeto novo. Região: **South America (São Paulo)**.
 2. Guarde a senha do banco num gerenciador de senhas.
 3. Vá em **SQL Editor > New query**, cole o conteúdo de `supabase/migrations/0001_inicial.sql` e clique em **Run**.
-4. Para ter o restaurante de exemplo, faça o mesmo com `supabase/seed.sql`.
-5. Em **Authentication > Sign In / Providers**, desligue **Allow new users to sign up**. Só o admin cria contas.
-6. Em **Authentication > Users > Add user**, crie a sua conta (e-mail e senha forte).
-7. No SQL Editor, torne a sua conta administradora da plataforma:
+4. Faça o mesmo com `supabase/migrations/0002_midia.sql` (vídeos e fotos).
+5. Para ter o restaurante de exemplo, faça o mesmo com `supabase/seed.sql`.
+6. Em **Authentication > Sign In / Providers**, desligue **Allow new users to sign up**. Só o admin cria contas.
+7. Em **Authentication > Users > Add user**, crie a sua conta (e-mail e senha forte).
+8. No SQL Editor, torne a sua conta administradora da plataforma:
 
    ```sql
    insert into public.platform_admins (user_id)
    select id from auth.users where email = 'SEU-EMAIL-AQUI';
    ```
 
-8. Em **Project Settings > API**, copie a URL, a chave `anon` e a chave `service_role`.
+9. Em **Project Settings > API**, copie a URL, a chave `anon` e a chave `service_role`.
 
 ### 2. Rodar no computador
 
 ```bash
-cp .env.example .env.local   # e preencha com as chaves do passo 1.8
+cp .env.example .env.local   # e preencha com as chaves do passo 1.9
 npm install
 npm run dev                  # abre em http://localhost:3000
 ```
@@ -64,6 +64,7 @@ npm run dev                  # abre em http://localhost:3000
 - **O preço é sempre recalculado no servidor.** O valor que vem do celular é ignorado.
 - **Ninguém cria pedido direto no banco.** O pedido entra só pela rota `/api/pedidos`, que valida tudo.
 - **O atendente não muda preço nem abre e fecha a loja.** Só dono e gerente.
+- **Vídeos:** cada restaurante só envia, troca ou apaga arquivos na própria pasta. Limite de 50 MB e só formatos de vídeo e imagem.
 - **Proteções contra robôs:** limite de 3 pedidos por número a cada 10 minutos, campo-isca contra robôs e tamanho máximo do pedido.
 - **Proteções do site:** cabeçalhos de segurança (CSP, HSTS, proibição de abrir o site dentro de outro site) e o link de acompanhamento com código secreto.
 - **A chave `service_role` só é usada no servidor.** Nunca vai para o navegador.

@@ -14,7 +14,7 @@ export type Item = {
   item_sizes: Size[];
   item_extras: Extra[];
 };
-export type Category = { id: string; name: string };
+export type Category = { id: string; name: string; position?: number };
 export type Restaurant = {
   id: string;
   slug: string;

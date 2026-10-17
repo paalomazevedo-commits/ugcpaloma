@@ -41,7 +41,8 @@ export default async function Painel({ searchParams }: { searchParams: Promise<{
     <main className="wide">
       <div className="panel-top">
         <h1>{current.restaurants.name}</h1>
-        <Link className="small" href={`/${current.restaurants.slug}`} target="_blank">Ver cardápio</Link>
+        <Link className="small" href={`/painel/cardapio?r=${current.restaurants.id}`}>Editar cardápio</Link>
+        <Link className="small" href={`/${current.restaurants.slug}`} target="_blank">Ver como cliente</Link>
         <span style={{ flex: 1 }} />
         {isAdmin === true && <Link className="small" href="/admin">Admin</Link>}
         <Link className="small" href="/painel/senha">Trocar senha</Link>
