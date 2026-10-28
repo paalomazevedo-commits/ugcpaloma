@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Abordagens e Bios | Paloma Ribeiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#fff6f0;             /* creme rosado do fundo */
+  --cartao:#ffffff;
+  --areia:#f3efe8;             /* faixa do topo do rascunho */
+  --campo:#fff3ea;             /* fundo dos campos do formulario */
+  --laranja:#c8441b;           /* COR PRINCIPAL: laranja queimado */
+  --laranja-forte:#a8360f;
+  --aviso:#fdeee4;
+  --aviso-linha:#f6cdb5;
+  --grifo:#fdf0b0;             /* amarelo do que muda de marca pra marca */
+  --grifo-linha:#e9cf5b;
+  --tinta:#1c1917;
+  --tinta-suave:#57524c;
+  --linha:#ece4dc;
+  --sublinhado:#f1b9a3;
+  --ok:#2f7d4f;
+  --raio:14px;
+  --raio-p:999px;
+  --sombra:0 10px 30px rgba(60,30,10,.06);
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --titulo:"Montserrat",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fundo);color:var(--tinta);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3{font-family:var(--titulo);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin:0}
+:focus-visible{outline:3px solid var(--laranja);outline-offset:2px;border-radius:6px}
+.pagina{max-width:1180px;margin:0 auto;padding:0 16px 80px}
+
+/* topo */
+.topo{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:18px 0;border-bottom:1px solid var(--linha);margin-bottom:36px}
+.marca{font-family:var(--titulo);font-weight:900;font-size:18px;letter-spacing:-.01em;margin-right:auto}
+.marca span{color:var(--laranja)}
+.abas-topo{display:flex;gap:6px}
+.abas-topo a{font-family:var(--mono);font-size:13px;text-decoration:none;color:var(--tinta);padding:8px 14px;border-radius:8px;border:1px solid var(--linha);background:var(--cartao)}
+.abas-topo a[aria-current="page"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+
+.sobretitulo{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--laranja);margin:0 0 10px}
+.titulo-grande{font-size:clamp(34px,6vw,64px)}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--tinta-suave);max-width:780px;margin:18px 0 0}
+.titulo-secao{display:flex;align-items:center;gap:14px;font-size:clamp(22px,3vw,28px);margin:56px 0 22px}
+.titulo-secao::before{content:"";width:22px;height:3px;background:var(--laranja);flex:none}
+
+/* estrutura */
+.estrutura{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.passo{background:var(--cartao);border:1px solid var(--linha);border-left:4px solid var(--laranja);border-radius:var(--raio);padding:16px 18px}
+.passo small{font-family:var(--mono);font-size:12px;color:var(--laranja)}
+.passo strong{display:block;font-size:17px;margin:4px 0 2px}
+.passo p{margin:0;font-size:14px;color:var(--tinta-suave)}
+.aviso{display:flex;gap:12px;align-items:flex-start;background:var(--aviso);border:1px solid var(--aviso-linha);border-radius:var(--raio);padding:16px 20px;margin-top:20px;font-size:15px}
+.aviso p{margin:0}
+
+/* abas de canal */
+.canais{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.canais button{font-family:var(--mono);font-size:13px;padding:9px 14px;border-radius:8px;border:1px solid var(--linha);background:var(--cartao)}
+.canais button[aria-selected="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.canais .novo{border-style:dashed;color:var(--laranja)}
+
+.grade{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:28px;align-items:start}
+@media (max-width:920px){.grade{grid-template-columns:1fr}}
+
+/* rascunho */
+.rascunho{background:var(--cartao);border:1px solid var(--linha);border-radius:18px;overflow:hidden;box-shadow:var(--sombra)}
+.rascunho__topo{background:var(--areia);padding:16px 22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--linha)}
+.rascunho__info{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--laranja)}
+.acoes{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font-family:var(--mono);font-size:12.5px;padding:8px 12px;border-radius:8px;border:1px solid var(--linha);background:var(--cartao);white-space:nowrap}
+.btn:hover{border-color:var(--tinta-suave)}
+.btn--forte{background:var(--laranja);border-color:var(--laranja);color:#fff}
+.btn--forte:hover{background:var(--laranja-forte);border-color:var(--laranja-forte)}
+.btn--perigo{color:#a11b1b}
+.rascunho__corpo{padding:24px 30px 30px;font-size:17px;line-height:1.85}
+@media (max-width:560px){.rascunho__corpo{padding:20px 18px 24px;font-size:16px}}
+.rascunho__corpo p{margin:0 0 18px}
+.rotulo{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave)}
+.assunto{font-weight:700;font-size:20px;margin:2px 0 22px}
+.campo{white-space:pre-wrap;border-radius:4px;padding:0 3px;outline:none;transition:background .15s}
+.campo--marca{background:var(--grifo);box-shadow:inset 0 -2px 0 var(--grifo-linha)}
+.campo--voce{box-shadow:inset 0 -1.5px 0 var(--sublinhado)}
+.campo:empty::before{content:attr(data-rotulo);color:#6b5a1a}
+.campo:empty{display:inline-block;min-width:3ch}
+.campo:focus{background:#fff8cf;box-shadow:inset 0 -2px 0 var(--laranja)}
+.copiar-linha{display:flex;flex-wrap:wrap;gap:8px;padding:16px 30px 24px;border-top:1px dashed var(--linha)}
+@media (max-width:560px){.copiar-linha{padding:14px 18px 20px}}
+
+/* edicao */
+.edicao{padding:22px 26px 26px;display:grid;gap:14px}
+.edicao label{display:grid;gap:6px;font-weight:700;font-size:14px}
+.edicao input,.edicao textarea,.form input,.form textarea{width:100%;border:1px solid var(--linha);background:var(--campo);border-radius:10px;padding:11px 13px;font-weight:400;font-size:15px}
+.edicao textarea{min-height:300px;font-family:var(--mono);font-size:13.5px;line-height:1.6;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font-family:var(--mono);font-size:12px;padding:5px 9px;border-radius:var(--raio-p);border:1px solid var(--grifo-linha);background:var(--grifo)}
+.dica-pequena{font-size:13px;color:var(--tinta-suave);margin:0;font-weight:400}
+
+/* formulario lateral */
+.form{background:var(--cartao);border:1px solid var(--linha);border-radius:18px;padding:22px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:920px){.form{position:static;max-height:none}}
+.form > p{margin:0 0 16px;color:var(--tinta-suave);font-size:15px}
+.form h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--laranja);margin:22px 0 10px;padding-top:16px;border-top:1px solid var(--linha)}
+.form h3:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.form label{display:block;font-weight:700;font-size:14px;margin:0 0 12px}
+.form label span{display:block;margin-bottom:6px}
+.form label small{display:block;font-weight:400;font-size:12.5px;color:var(--tinta-suave);margin-top:4px}
+.form textarea{min-height:90px;resize:vertical}
+.form .num{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--laranja);display:block;font-weight:500}
+
+/* bios */
+.bios{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+@media (max-width:400px){.bios{grid-template-columns:1fr}}
+.bio{background:var(--cartao);border:1px solid var(--linha);border-left:4px solid var(--laranja);border-radius:var(--raio);padding:18px;display:grid;grid-template-columns:minmax(0,1fr);min-width:0;gap:10px;box-shadow:var(--sombra)}
+.bio__topo{display:flex;gap:8px;align-items:center}
+.bio__nome{flex:1;min-width:0;font-weight:700;font-size:17px;border:0;background:transparent;padding:4px 0;border-bottom:1px dashed transparent}
+.bio__nome:hover,.bio__nome:focus{border-bottom-color:var(--linha);outline:none}
+.bio__limite{flex:none;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--tinta-suave)}
+.bio__limite input{width:64px;border:1px solid var(--linha);background:var(--campo);border-radius:6px;padding:4px 6px;font-family:var(--mono);font-size:12px}
+.bio textarea{width:100%;min-height:150px;border:1px solid var(--linha);background:var(--campo);border-radius:10px;padding:12px;font-size:15px;line-height:1.55;resize:vertical}
+.bio__base{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.contador{font-family:var(--mono);font-size:12px;color:var(--tinta-suave)}
+.contador.passou{color:#a11b1b;font-weight:500}
+.bio--nova{display:grid;place-items:center;border:2px dashed var(--aviso-linha);border-radius:var(--raio);min-height:200px;background:transparent;font-family:var(--mono);color:var(--laranja);font-size:14px}
+
+/* rodape e aviso flutuante */
+.rodape{margin-top:70px;padding-top:22px;border-top:1px solid var(--linha);display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;color:var(--tinta-suave)}
+.rodape p{margin:0 auto 0 0;max-width:560px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--tinta);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.2s;max-width:calc(100% - 32px);text-align:center;z-index:50}
+.toast.ver{opacity:1;transform:translateX(-50%) translateY(0)}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="pagina">
+
+  <header class="topo">
+    <div class="marca">Paloma Ribeiro <span>/</span> admin</div>
+    <nav class="abas-topo" aria-label="Seções">
+      <a href="#abordagens" id="linkAbordagens">Abordagens</a>
+      <a href="#bios" id="linkBios">Bios</a>
+    </nav>
+  </header>
+
+  <!-- ABORDAGENS -->
+  <main id="telaAbordagens">
+    <p class="sobretitulo">Minhas bases de referência</p>
+    <h1 class="titulo-grande">Responde uma vez.<br>A abordagem se escreve.</h1>
+    <p class="lead">Escolhe o canal, preenche o que muda de marca pra marca e copia a mensagem pronta. E-mail, plataforma, DM, WhatsApp: tudo no mesmo lugar.</p>
+
+    <h2 class="titulo-secao" id="tituloEstrutura">A estrutura</h2>
+    <div class="estrutura" id="estrutura"></div>
+    <div class="aviso" id="avisoCanal">
+      <span aria-hidden="true">⚠️</span>
+      <p><strong>O que muda de marca pra marca fica grifado de amarelo.</strong> Clica em cima e escreve. O que é sobre você fica sublinhado e vale para todos os canais.</p>
+    </div>
+
+    <h2 class="titulo-secao">A sua mensagem</h2>
+    <div class="grade">
+      <div>
+        <div class="canais" id="canais" role="tablist" aria-label="Canal da abordagem"></div>
+
+        <section class="rascunho" aria-live="polite">
+          <div class="rascunho__topo">
+            <span class="rascunho__info" id="infoVersao"></span>
+            <div class="acoes" id="acoesVer">
+              <button class="btn btn--forte" id="btnCopiar">Copiar mensagem</button>
+              <button class="btn" id="btnOutra">Outra versão</button>
+              <button class="btn" id="btnEditar">Editar base</button>
+            </div>
+          </div>
+
+          <div id="modoVer">
+            <div class="rascunho__corpo" id="corpo"></div>
+            <div class="copiar-linha">
+              <button class="btn" id="btnCopiarAssunto" hidden>Copiar só o assunto</button>
+              <button class="btn" id="btnNovaVersao">+ Nova versão</button>
+              <button class="btn" id="btnOriginal" hidden>Voltar ao original</button>
+            </div>
+          </div>
+
+          <form class="edicao" id="modoEditar" hidden>
+            <label>Nome do canal
+              <input id="edCanalNome" required maxlength="40">
+            </label>
+            <label>Nome desta versão
+              <input id="edVersaoNome" required maxlength="60">
+            </label>
+            <label>Assunto <span class="dica-pequena">Deixe vazio em DM, WhatsApp e mensagens sem assunto.</span>
+              <input id="edAssunto">
+            </label>
+            <label>Texto
+              <textarea id="edCorpo" spellcheck="true"></textarea>
+            </label>
+            <div>
+              <p class="dica-pequena" style="margin-bottom:8px">Clique para inserir um campo no ponto do cursor. Uma linha em branco separa os parágrafos.</p>
+              <div class="chips" id="chips"></div>
+            </div>
+            <label>Dica deste canal
+              <input id="edDica" maxlength="240">
+            </label>
+            <div class="acoes">
+              <button class="btn btn--forte" type="submit">Salvar</button>
+              <button class="btn" type="button" id="btnCancelar">Cancelar</button>
+              <button class="btn btn--perigo" type="button" id="btnApagarVersao">Apagar versão</button>
+              <button class="btn btn--perigo" type="button" id="btnApagarCanal">Apagar canal</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <aside class="form" id="form" aria-label="Respostas">
+        <p>Responde do jeito que você falaria. O texto ao lado se monta sozinho.</p>
+        <h3>Sobre você</h3>
+        <div id="formVoce"></div>
+        <h3>Sobre a marca</h3>
+        <div id="formMarca"></div>
+        <button class="btn" type="button" id="btnLimparMarca">Limpar marca (começar outra)</button>
+      </aside>
+    </div>
+  </main>
+
+  <!-- BIOS -->
+  <main id="telaBios" hidden>
+    <p class="sobretitulo">Minhas bios</p>
+    <h1 class="titulo-grande">Cada plataforma,<br>a bio certa.</h1>
+    <p class="lead">Guarde aqui as bios que você usa em cada rede e plataforma. O contador avisa quando passa do limite de caracteres.</p>
+    <h2 class="titulo-secao">Bios salvas</h2>
+    <div class="bios" id="listaBios"></div>
+  </main>
+
+  <footer class="rodape">
+    <p id="statusSalvo">Tudo fica salvo automaticamente neste navegador. Baixe uma cópia de vez em quando para não perder nada.</p>
+    <button class="btn" id="btnExportar">Baixar cópia</button>
+    <label class="btn" for="arquivoImportar" style="cursor:pointer">Restaurar cópia</label>
+    <input type="file" id="arquivoImportar" accept="application/json,.json" hidden>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var CHAVE = "paloma-admin-abordagens-v1";
+
+  // Campos que podem aparecer nos textos como {{chave}}.
+  // grupo "voce" vale para tudo; grupo "marca" muda a cada abordagem.
+  var CAMPOS = [
+    { k: "nome", g: "voce", rotulo: "seu nome", label: "Nome" },
+    { k: "arroba", g: "voce", rotulo: "seu @", label: "@", dica: "Sem o @ na frente." },
+    { k: "portfolio", g: "voce", rotulo: "portfólio", label: "Portfólio" },
+    { k: "cidade", g: "voce", rotulo: "cidade", label: "Cidade" },
+    { k: "whatsapp", g: "voce", rotulo: "seu WhatsApp", label: "WhatsApp" },
+    { k: "diferenciais", g: "voce", rotulo: "seus diferenciais", label: "Seus diferenciais", longo: true, dica: "O que te faz diferente." },
+    { k: "marca", g: "marca", rotulo: "pessoa ou nome da marca", label: "Pessoa ou marca" },
+    { k: "produto", g: "marca", rotulo: "produto", label: "Produto" },
+    { k: "link", g: "marca", rotulo: "link do produto", label: "Link do produto" },
+    { k: "viu", g: "marca", rotulo: "o que você viu", label: "O que você viu no site ou perfil deles", longo: true, dica: "Uma coisa específica. É o que prova que você pesquisou." },
+    { k: "conexao", g: "marca", rotulo: "por que vocês dão match", label: "A conexão", longo: true, dica: "Por que essa marca faz sentido pra você agora." },
+    { k: "ideia", g: "marca", rotulo: "a ideia", label: "A ideia", longo: true, dica: "O conteúdo que você já pensou pra eles." }
+  ];
+  var CAMPO = {};
+  CAMPOS.forEach(function (c) { CAMPO[c.k] = c; });
+
+  var PADRAO = {
+    voce: {
+      nome: "Paloma Ribeiro",
+      arroba: "paalomaribeiro",
+      portfolio: "palomaribeiro.com",
+      cidade: "Praia Grande",
+      whatsapp: "",
+      diferenciais: "Sou criadora de conteúdo UGC há quase 2 anos. Tenho compartilhado a minha jornada antes dos 30."
+    },
+    marca: { marca: "", produto: "", link: "", viu: "", conexao: "", ideia: "" },
+    canais: [
+      {
+        id: "gmail", nome: "E-mail (Gmail)",
+        dica: "Quatro parágrafos curtos. Assunto direto, com o nome do produto.",
+        estrutura: [
+          ["Quem você é", "E como você chegou nessa marca."],
+          ["A conexão", "Por que vocês dão match agora."],
+          ["A ideia", "O conteúdo que você já pensou."],
+          ["O convite", "A pergunta e o seu portfólio."]
+        ],
+        versoes: [
+          {
+            id: "gmail-direta", nome: "A proposta direta",
+            assunto: "Proposta de conteúdo pro {{produto}} de vocês",
+            corpo: "Oieee {{marca}}, tudo bem?\n\nAqui é a {{nome}}, criadora de conteúdo UGC de {{cidade}} (@{{arroba}}). Cheguei em vocês pesquisando {{produto}} e acabei ficando um tempão no site, principalmente {{viu}}\n\n{{conexao}} É esse aqui ó: {{link}}.\n\nA ideia: {{ideia}} Isso vira vídeo vertical e fotos pra vocês usarem, inclusive em ads, e eu documento no meu perfil com @ e link.\n\n{{diferenciais}}\n\nSe fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{portfolio}}"
+          },
+          {
+            id: "gmail-curta", nome: "Curta e objetiva",
+            assunto: "{{nome}} x {{marca}}: ideia de conteúdo",
+            corpo: "Oi, {{marca}}! Tudo bem?\n\nSou a {{nome}} (@{{arroba}}), criadora de conteúdo UGC. {{conexao}}\n\nPensei num conteúdo assim: {{ideia}}\n\nTopam conversar? Meu portfólio tá aqui: {{portfolio}}"
+          },
+          {
+            id: "gmail-follow", nome: "Segundo e-mail (follow-up)",
+            assunto: "Re: Proposta de conteúdo pro {{produto}} de vocês",
+            corpo: "Oi de novo, {{marca}}!\n\nPassando só pra saber se vocês conseguiram ver a minha ideia pro {{produto}}.\n\nResumindo: {{ideia}}\n\nSe não for o momento, sem problemas! Fico de olho nas próximas campanhas.\nPortfólio: {{portfolio}}"
+          }
+        ]
+      },
+      {
+        id: "plataforma", nome: "E-mail pela plataforma",
+        dica: "Para formulários de contato do site da marca e e-mails enviados por plataformas. Mais formal e sem anexos.",
+        estrutura: [
+          ["Apresentação", "Nome, o que você faz e o seu @."],
+          ["A conexão", "Por que essa marca."],
+          ["A ideia", "Um resumo do conteúdo."],
+          ["O próximo passo", "Pedir o contato de parcerias."]
+        ],
+        versoes: [
+          {
+            id: "plataforma-form", nome: "Mensagem pelo formulário",
+            assunto: "Parceria de conteúdo UGC | {{nome}}",
+            corpo: "Olá, equipe {{marca}}! Meu nome é {{nome}}, sou criadora de conteúdo UGC (@{{arroba}}).\n\n{{conexao}}\n\nTenho uma ideia de conteúdo pro {{produto}}: {{ideia}}\n\nGostaria de saber quem é a pessoa responsável por parcerias pra eu enviar a proposta completa.\nMeu portfólio: {{portfolio}}"
+          }
+        ]
+      },
+      {
+        id: "dm", nome: "DM do Instagram",
+        dica: "Curta, leve e sem link na primeira mensagem. O objetivo é abrir a conversa.",
+        estrutura: [
+          ["Abre a conversa", "Um oi de verdade."],
+          ["A conexão", "O que você viu e gostou."],
+          ["O convite", "Pergunta onde mandar a proposta."]
+        ],
+        versoes: [
+          {
+            id: "dm-primeira", nome: "Primeira DM", assunto: "",
+            corpo: "Oiee, tudo bem? 💛\n\nSou a {{nome}}, crio conteúdo UGC aqui de {{cidade}}. {{conexao}}\n\nTive uma ideia de conteúdo pro {{produto}} de vocês: {{ideia}}\n\nPosso mandar a proposta por aqui ou tem um e-mail melhor?"
+          },
+          {
+            id: "dm-stories", nome: "Respondendo um story", assunto: "",
+            corpo: "Oi! Amei {{viu}} 😍\n\nInclusive, sou criadora de conteúdo UGC e tô com uma ideia pro {{produto}}: {{ideia}}\n\nSe fizer sentido, te mando meu portfólio: {{portfolio}}"
+          }
+        ]
+      },
+      {
+        id: "whatsapp", nome: "WhatsApp",
+        dica: "Primeiro descubra com quem falar. A proposta vai na segunda mensagem.",
+        estrutura: [
+          ["Quem você é", "Nome e @."],
+          ["A conexão", "Por que você chamou."],
+          ["A pergunta", "Com quem falar sobre parcerias."]
+        ],
+        versoes: [
+          {
+            id: "whats-primeiro", nome: "Primeiro contato", assunto: "",
+            corpo: "Oi, {{marca}}! Tudo bem? Aqui é a {{nome}}, criadora de conteúdo UGC (@{{arroba}}).\n\n{{conexao}}\n\nTenho uma ideia de conteúdo pro {{produto}} de vocês e queria saber com quem posso falar sobre parcerias. Pode ser por aqui mesmo?"
+          },
+          {
+            id: "whats-proposta", nome: "Mandando a proposta", assunto: "",
+            corpo: "Perfeito, obrigada! 🙏\n\nA ideia: {{ideia}}\n\nEntrego vídeo vertical e fotos pra vocês usarem nas redes e em ads.\n\nMeu portfólio: {{portfolio}}\n\nFico no aguardo!"
+          }
+        ]
+      },
+      {
+        id: "plataformas-ugc", nome: "Plataformas de UGC",
+        dica: "Para candidaturas em campanhas de plataformas de UGC. Responda ao briefing, não fale só de você.",
+        estrutura: [
+          ["Apresentação", "Quem você é, em uma linha."],
+          ["Por que você", "Seus diferenciais."],
+          ["A ideia", "Como você faria o briefing."],
+          ["A entrega", "Formato, prazo e portfólio."]
+        ],
+        versoes: [
+          {
+            id: "ugc-candidatura", nome: "Candidatura a campanha", assunto: "",
+            corpo: "Oi, time {{marca}}! Sou a {{nome}}, criadora de conteúdo UGC de {{cidade}}.\n\n{{diferenciais}}\n\nPra essa campanha, pensei em: {{ideia}}\n\nEntrego no prazo combinado, com vídeo vertical pronto pra ads e direitos de uso conforme o briefing.\nPortfólio: {{portfolio}}"
+          }
+        ]
+      }
+    ],
+    bios: [
+      { id: "bio-ig", plataforma: "Instagram", limite: 150, texto: "Criadora de conteúdo UGC 🎥 | Praia Grande 🌊\nMinha jornada antes dos 30\nParcerias: palomaribeiro.com" },
+      { id: "bio-tiktok", plataforma: "TikTok", limite: 80, texto: "Criadora UGC 🎥 Minha jornada antes dos 30" },
+      { id: "bio-ugc", plataforma: "Plataformas de UGC", limite: 0, texto: "Sou a Paloma, criadora de conteúdo UGC de Praia Grande há quase 2 anos. Crio vídeos verticais e fotos para marcas usarem nas redes e em anúncios." }
+    ]
+  };
+
+  // ---------- estado ----------
+  function copia(o) { return JSON.parse(JSON.stringify(o)); }
+
+  var estado = copia(PADRAO);
+  estado.canalAtual = "gmail";
+  estado.versaoAtual = {};
+
+  try {
+    var salvo = JSON.parse(localStorage.getItem(CHAVE) || "null");
+    if (salvo && typeof salvo === "object") mesclar(salvo);
+  } catch (e) { /* sem armazenamento: segue com os padroes */ }
+
+  function mesclar(s) {
+    if (s.voce) Object.assign(estado.voce, s.voce);
+    if (s.marca) Object.assign(estado.marca, s.marca);
+    if (Array.isArray(s.canais) && s.canais.length) estado.canais = s.canais;
+    if (Array.isArray(s.bios)) estado.bios = s.bios;
+    if (s.canalAtual) estado.canalAtual = s.canalAtual;
+    if (s.versaoAtual) estado.versaoAtual = s.versaoAtual;
+  }
+
+  var timerSalvar;
+  function gravar() {
+    clearTimeout(timerSalvar);
+    try { localStorage.setItem(CHAVE, JSON.stringify(estado)); }
+    catch (e) { $("statusSalvo").textContent = "Este navegador não está salvando. Use \"Baixar cópia\" antes de fechar."; }
+  }
+  function salvar() {
+    clearTimeout(timerSalvar);
+    timerSalvar = setTimeout(gravar, 250);
+  }
+  window.addEventListener("pagehide", gravar);
+
+  // ---------- utilidades ----------
+  function $(id) { return document.getElementById(id); }
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function novoId(p) { return p + "-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function valor(k) { var c = CAMPO[k]; return c ? (estado[c.g][k] || "") : ""; }
+
+  var timerToast;
+  function avisar(msg) {
+    var t = $("toast");
+    t.textContent = msg;
+    t.classList.add("ver");
+    clearTimeout(timerToast);
+    timerToast = setTimeout(function () { t.classList.remove("ver"); }, 2600);
+  }
+
+  function copiarTexto(texto, msg) {
+    function ok() { avisar(msg); }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(texto).then(ok, reserva);
+    } else reserva();
+    function reserva() {
+      var ta = document.createElement("textarea");
+      ta.value = texto;
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); ok(); } catch (e) { avisar("Não deu para copiar. Selecione o texto e copie."); }
+      ta.remove();
+    }
+  }
+
+  function canal() {
+    var c = estado.canais.find(function (x) { return x.id === estado.canalAtual; });
+    if (!c) { c = estado.canais[0]; estado.canalAtual = c.id; }
+    return c;
+  }
+  function indiceVersao(c) {
+    var i = estado.versaoAtual[c.id] || 0;
+    return i < c.versoes.length ? i : 0;
+  }
+  function versao() { var c = canal(); return c.versoes[indiceVersao(c)]; }
+  function versaoPadrao(id) {
+    for (var i = 0; i < PADRAO.canais.length; i++) {
+      var v = PADRAO.canais[i].versoes.find(function (x) { return x.id === id; });
+      if (v) return v;
+    }
+    return null;
+  }
+
+  // Troca {{chave}} pelo valor; o que esta vazio vira "(rotulo)".
+  function preencher(tpl, faltando) {
+    return String(tpl || "").replace(/\{\{(\w+)\}\}/g, function (m, k) {
+      var c = CAMPO[k];
+      if (!c) return m;
+      var v = valor(k).trim();
+      if (!v) { if (faltando && faltando.indexOf(c.rotulo) < 0) faltando.push(c.rotulo); return "(" + c.rotulo + ")"; }
+      return v;
+    });
+  }
+
+  function campoHtml(k) {
+    var c = CAMPO[k];
+    return '<span class="campo campo--' + c.g + '" contenteditable="plaintext-only" spellcheck="true" data-k="' + k +
+      '" data-rotulo="(' + esc(c.rotulo) + ')" role="textbox" aria-label="' + esc(c.label) + '">' + esc(valor(k)) + "</span>";
+  }
+  function trechoHtml(texto) {
+    return esc(texto).replace(/\{\{(\w+)\}\}/g, function (m, k) { return CAMPO[k] ? campoHtml(k) : m; });
+  }
+
+  // ---------- abordagens ----------
+  function desenharCanais() {
+    var html = estado.canais.map(function (c) {
+      return '<button type="button" role="tab" data-canal="' + esc(c.id) + '" aria-selected="' + (c.id === estado.canalAtual) + '">' + esc(c.nome) + "</button>";
+    }).join("");
+    $("canais").innerHTML = html + '<button type="button" class="novo" id="btnNovoCanal">+ Novo canal</button>';
+  }
+
+  function desenharEstrutura() {
+    var c = canal();
+    var passos = c.estrutura || [];
+    $("tituloEstrutura").textContent = "A estrutura: " + c.nome;
+    $("tituloEstrutura").hidden = !passos.length;
+    $("estrutura").hidden = !passos.length;
+    $("estrutura").innerHTML = passos.map(function (p, i) {
+      return '<div class="passo"><small>Parte ' + (i + 1) + "</small><strong>" + esc(p[0]) + "</strong><p>" + esc(p[1]) + "</p></div>";
+    }).join("");
+  }
+
+  function desenharRascunho() {
+    var c = canal(), i = indiceVersao(c), v = c.versoes[i];
+    $("infoVersao").textContent = "Versão " + (i + 1) + " de " + c.versoes.length + " · " + v.nome;
+    $("btnOutra").hidden = c.versoes.length < 2;
+    $("btnCopiarAssunto").hidden = !v.assunto;
+    var p = versaoPadrao(v.id);
+    $("btnOriginal").hidden = !p || (p.corpo === v.corpo && p.assunto === v.assunto && p.nome === v.nome);
+
+    var html = "";
+    if (v.assunto) html += '<div class="rotulo">Assunto</div><div class="assunto">' + trechoHtml(v.assunto) + "</div>";
+    html += String(v.corpo || "").split(/\n\s*\n/).map(function (par) {
+      return "<p>" + trechoHtml(par).replace(/\n/g, "<br>") + "</p>";
+    }).join("");
+    if (c.dica) html += '<p class="dica-pequena" style="margin-top:26px">💡 ' + esc(c.dica) + "</p>";
+    $("corpo").innerHTML = html;
+  }
+
+  function desenharForm() {
+    function grupo(g) {
+      var n = 0;
+      return CAMPOS.filter(function (c) { return c.g === g; }).map(function (c) {
+        n++;
+        var id = "f-" + c.k;
+        var entrada = c.longo
+          ? '<textarea id="' + id + '" data-k="' + c.k + '">' + esc(valor(c.k)) + "</textarea>"
+          : '<input id="' + id + '" data-k="' + c.k + '" value="' + esc(valor(c.k)) + '">';
+        return '<label for="' + id + '">' + (g === "marca" ? '<i class="num">0' + n + "</i>" : "") +
+          "<span>" + esc(c.label) + "</span>" + entrada + (c.dica ? "<small>" + esc(c.dica) + "</small>" : "") + "</label>";
+      }).join("");
+    }
+    $("formVoce").innerHTML = grupo("voce");
+    $("formMarca").innerHTML = grupo("marca");
+  }
+
+  function desenharAbordagens() {
+    desenharCanais();
+    desenharEstrutura();
+    desenharRascunho();
+  }
+
+  // Atualiza um campo em todos os lugares, menos no elemento que esta sendo digitado.
+  function mudarCampo(k, v, origem) {
+    var c = CAMPO[k];
+    if (!c) return;
+    estado[c.g][k] = v;
+    document.querySelectorAll('[data-k="' + k + '"]').forEach(function (el) {
+      if (el === origem) return;
+      if (el.tagName === "SPAN") el.textContent = v; else el.value = v;
+    });
+    salvar();
+  }
+
+  $("corpo").addEventListener("input", function (e) {
+    var el = e.target.closest(".campo");
+    if (el) mudarCampo(el.dataset.k, el.innerText.replace(/\n$/, ""), el);
+  });
+  $("corpo").addEventListener("paste", function (e) {
+    if (!e.target.closest(".campo")) return;
+    e.preventDefault();
+    document.execCommand("insertText", false, (e.clipboardData || window.clipboardData).getData("text"));
+  });
+  $("form").addEventListener("input", function (e) {
+    if (e.target.dataset.k) mudarCampo(e.target.dataset.k, e.target.value, e.target);
+  });
+
+  $("canais").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    if (b.id === "btnNovoCanal") return novoCanal();
+    estado.canalAtual = b.dataset.canal;
+    sairEdicao();
+    desenharAbordagens();
+    salvar();
+  });
+
+  $("btnOutra").addEventListener("click", function () {
+    var c = canal();
+    estado.versaoAtual[c.id] = (indiceVersao(c) + 1) % c.versoes.length;
+    desenharRascunho();
+    salvar();
+  });
+
+  $("btnCopiar").addEventListener("click", function () {
+    var v = versao(), faltando = [];
+    var texto = preencher(v.corpo, faltando);
+    if (v.assunto) texto = "Assunto: " + preencher(v.assunto, faltando) + "\n\n" + texto;
+    copiarTexto(texto, faltando.length ? "Copiado! Ainda falta: " + faltando.join(", ") + "." : "Copiado! É só colar e enviar.");
+  });
+  $("btnCopiarAssunto").addEventListener("click", function () {
+    copiarTexto(preencher(versao().assunto), "Assunto copiado!");
+  });
+
+  $("btnOriginal").addEventListener("click", function () {
+    var v = versao(), p = versaoPadrao(v.id);
+    if (!p || !confirm("Voltar esta versão ao texto original? As suas mudanças nela serão perdidas.")) return;
+    v.nome = p.nome; v.assunto = p.assunto; v.corpo = p.corpo;
+    desenharRascunho();
+    salvar();
+  });
+
+  $("btnNovaVersao").addEventListener("click", function () {
+    var c = canal(), atual = versao();
+    c.versoes.push({ id: novoId("v"), nome: "Nova versão", assunto: atual.assunto, corpo: atual.corpo });
+    estado.versaoAtual[c.id] = c.versoes.length - 1;
+    desenharRascunho();
+    entrarEdicao();
+    salvar();
+  });
+
+  $("btnLimparMarca").addEventListener("click", function () {
+    if (!confirm("Limpar os campos da marca para começar outra abordagem?")) return;
+    Object.keys(estado.marca).forEach(function (k) { estado.marca[k] = ""; });
+    desenharForm();
+    desenharRascunho();
+    salvar();
+  });
+
+  function novoCanal() {
+    var nome = (prompt("Nome do novo canal (ex.: LinkedIn, TikTok, Proposta comercial):") || "").trim();
+    if (!nome) return;
+    var c = { id: novoId("c"), nome: nome.slice(0, 40), dica: "", estrutura: [], versoes: [{ id: novoId("v"), nome: "Primeira versão", assunto: "", corpo: "Oi, {{marca}}! Aqui é a {{nome}} (@{{arroba}}).\n\n" }] };
+    estado.canais.push(c);
+    estado.canalAtual = c.id;
+    desenharAbordagens();
+    entrarEdicao();
+    salvar();
+  }
+
+  // ---------- edicao da base ----------
+  $("chips").innerHTML = CAMPOS.map(function (c) {
+    return '<button type="button" data-k="' + c.k + '" title="' + esc(c.label) + '">{{' + c.k + "}}</button>";
+  }).join("");
+  var ultimoAlvo = $("edCorpo");
+  ["edCorpo", "edAssunto"].forEach(function (id) {
+    $(id).addEventListener("focus", function () { ultimoAlvo = $(id); });
+  });
+  $("chips").addEventListener("mousedown", function (e) { e.preventDefault(); });
+  $("chips").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    var alvo = ultimoAlvo, txt = "{{" + b.dataset.k + "}}";
+    var ini = alvo.selectionStart, fim = alvo.selectionEnd;
+    alvo.value = alvo.value.slice(0, ini) + txt + alvo.value.slice(fim);
+    alvo.focus();
+    alvo.selectionStart = alvo.selectionEnd = ini + txt.length;
+  });
+
+  function entrarEdicao() {
+    var c = canal(), v = versao();
+    $("edCanalNome").value = c.nome;
+    $("edVersaoNome").value = v.nome;
+    $("edAssunto").value = v.assunto || "";
+    $("edCorpo").value = v.corpo || "";
+    $("edDica").value = c.dica || "";
+    $("btnApagarVersao").hidden = c.versoes.length < 2;
+    $("btnApagarCanal").hidden = estado.canais.length < 2;
+    $("modoVer").hidden = true;
+    $("acoesVer").hidden = true;
+    $("modoEditar").hidden = false;
+    $("edCorpo").focus();
+  }
+  function sairEdicao() {
+    $("modoEditar").hidden = true;
+    $("modoVer").hidden = false;
+    $("acoesVer").hidden = false;
+  }
+
+  $("btnEditar").addEventListener("click", entrarEdicao);
+  $("btnCancelar").addEventListener("click", function () { sairEdicao(); desenharRascunho(); });
+  $("modoEditar").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var c = canal(), v = versao();
+    c.nome = $("edCanalNome").value.trim() || c.nome;
+    c.dica = $("edDica").value.trim();
+    v.nome = $("edVersaoNome").value.trim() || v.nome;
+    v.assunto = $("edAssunto").value.trim();
+    v.corpo = $("edCorpo").value.replace(/\s+$/, "");
+    sairEdicao();
+    desenharAbordagens();
+    salvar();
+    avisar("Base salva!");
+  });
+  $("btnApagarVersao").addEventListener("click", function () {
+    var c = canal();
+    if (c.versoes.length < 2 || !confirm("Apagar a versão \"" + versao().nome + "\"?")) return;
+    c.versoes.splice(indiceVersao(c), 1);
+    estado.versaoAtual[c.id] = 0;
+    sairEdicao();
+    desenharRascunho();
+    salvar();
+  });
+  $("btnApagarCanal").addEventListener("click", function () {
+    var c = canal();
+    if (estado.canais.length < 2 || !confirm("Apagar o canal \"" + c.nome + "\" e todas as versões dele?")) return;
+    estado.canais = estado.canais.filter(function (x) { return x !== c; });
+    estado.canalAtual = estado.canais[0].id;
+    sairEdicao();
+    desenharAbordagens();
+    salvar();
+  });
+
+  // ---------- bios ----------
+  function contador(b) {
+    var n = Array.from(b.texto || "").length;
+    var passou = b.limite > 0 && n > b.limite;
+    return { txt: b.limite > 0 ? n + " / " + b.limite + (passou ? " · passou " + (n - b.limite) : "") : n + " caracteres", passou: passou };
+  }
+
+  function desenharBios() {
+    $("listaBios").innerHTML = estado.bios.map(function (b) {
+      var ct = contador(b);
+      return '<article class="bio" data-id="' + esc(b.id) + '">' +
+        '<div class="bio__topo"><input class="bio__nome" data-campo="plataforma" value="' + esc(b.plataforma) + '" aria-label="Plataforma" maxlength="40">' +
+        '<label class="bio__limite">limite <input type="number" min="0" max="5000" data-campo="limite" value="' + (b.limite || "") + '" placeholder="—" aria-label="Limite de caracteres"></label></div>' +
+        '<textarea data-campo="texto" aria-label="Texto da bio de ' + esc(b.plataforma) + '">' + esc(b.texto) + "</textarea>" +
+        '<div class="bio__base"><span class="contador' + (ct.passou ? " passou" : "") + '">' + ct.txt + "</span>" +
+        '<div class="acoes"><button class="btn btn--forte" data-acao="copiar">Copiar</button><button class="btn btn--perigo" data-acao="apagar">Apagar</button></div></div>' +
+        "</article>";
+    }).join("") + '<button class="bio--nova" id="btnNovaBio">+ Nova bio</button>';
+  }
+
+  function bioDe(el) {
+    var art = el.closest(".bio");
+    return art && estado.bios.find(function (b) { return b.id === art.dataset.id; });
+  }
+
+  $("listaBios").addEventListener("input", function (e) {
+    var b = bioDe(e.target), campo = e.target.dataset.campo;
+    if (!b || !campo) return;
+    b[campo] = campo === "limite" ? Math.max(0, parseInt(e.target.value, 10) || 0) : e.target.value;
+    var ct = contador(b), el = e.target.closest(".bio").querySelector(".contador");
+    el.textContent = ct.txt;
+    el.classList.toggle("passou", ct.passou);
+    salvar();
+  });
+  $("listaBios").addEventListener("click", function (e) {
+    if (e.target.closest("#btnNovaBio")) {
+      estado.bios.push({ id: novoId("bio"), plataforma: "Nova plataforma", limite: 0, texto: "" });
+      desenharBios();
+      salvar();
+      var nomes = document.querySelectorAll(".bio__nome");
+      nomes[nomes.length - 1].select();
+      return;
+    }
+    var bt = e.target.closest("[data-acao]"), b = bt && bioDe(bt);
+    if (!b) return;
+    if (bt.dataset.acao === "copiar") copiarTexto(b.texto, "Bio do " + b.plataforma + " copiada!");
+    if (bt.dataset.acao === "apagar" && confirm("Apagar a bio de " + b.plataforma + "?")) {
+      estado.bios = estado.bios.filter(function (x) { return x !== b; });
+      desenharBios();
+      salvar();
+    }
+  });
+
+  // ---------- copia de seguranca ----------
+  $("btnExportar").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify(estado, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "abordagens-e-bios-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+  $("arquivoImportar").addEventListener("change", function (e) {
+    var arq = e.target.files[0];
+    if (!arq) return;
+    arq.text().then(function (t) {
+      var dados = JSON.parse(t);
+      if (!dados || !Array.isArray(dados.canais)) throw new Error("formato");
+      if (!confirm("Trocar tudo o que está aqui pela cópia \"" + arq.name + "\"?")) return;
+      mesclar(dados);
+      tudo();
+      salvar();
+      avisar("Cópia restaurada!");
+    }).catch(function () { avisar("Esse arquivo não é uma cópia deste painel."); })
+      .then(function () { e.target.value = ""; });
+  });
+
+  // ---------- navegacao ----------
+  function rota() {
+    var bios = location.hash === "#bios";
+    $("telaBios").hidden = !bios;
+    $("telaAbordagens").hidden = bios;
+    $("linkBios").setAttribute("aria-current", bios ? "page" : "false");
+    $("linkAbordagens").setAttribute("aria-current", bios ? "false" : "page");
+  }
+  window.addEventListener("hashchange", function () { rota(); window.scrollTo(0, 0); });
+
+  function tudo() {
+    sairEdicao();
+    desenharForm();
+    desenharAbordagens();
+    desenharBios();
+  }
+  tudo();
+  rota();
+})();
+</script>
+</body>
+</html>
